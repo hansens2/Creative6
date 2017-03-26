@@ -8,6 +8,17 @@ var dbUrl = 'mongodb://localhost:27017/message';
 
 var collection;
 
+String.prototype.hashCode = function () {
+    var hash = 0, i, chr;
+    if (this.length === 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+};
+
 MongoClient.connect(dbUrl, function (err, db) {
     if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -26,32 +37,53 @@ router.get('/', function (req, res) {
 });
 
 router.post('/message', function (req, res, next) {
-    var pin = Math.random() * (9999);
-    var hash = req.body.name * pin * 31;
+    var pin = Math.floor(Math.random() * (9999));
+    var hash = req.body.name.hashCode() * pin * 31;
+    console.log(req.body);
+    console.log(hash);
     var item = {
         hash: hash,
         message: req.body.message
     }
+    console.log(item);
     collection.insertOne(item, function (err, result) {
         if (err) { console.log(err) }
         else {
-            res.send(pin);
+            res.send({ data: pin });
         }
     });
 
 });
 
-router.get('/message:hashCode', function (req, res, next) {
-    collection.find({ hash: req.params.hashCode }, function (err, doc) {
+router.get('/message/:name/:pin', function (req, res, next) {
+    var hashs = req.params.name.hashCode() * req.params.pin * 31;
+    console.log(hashs);
+    //collection.find({ "hash": hashs }, function (err, doc) {
+    //    if (err) {
+    //        console.log(err)
+    //        res.send(null);
+    //    }
+    //    else {
+    //        console.log(doc.hasNext());
+    //        collection.removeOne({ hash: req.params.hashCode });
+    //        var theMessage = doc.next().message;
+    //        console.log(theMessage);
+    //        res.send(theMessage);
+    //    }
+    //});
+    collection.find({ "hash" : hashs }).toArray(function (err, result) {
         if (err) {
-            console.log(err)
-            res.send(null);
+            console.log(err);
+        } else if (result.length) {
+            console.log("Query Successful");
+            console.log(result);
+            collection.removeOne({ 'hash': hashs });
+            res.send(result[0].message)
+        } else {
+            console.log("No Documents found");
         }
-        else {
-            collection.removeOne({ hash: req.params.hashCode });
-            res.send(res.message);
-        }
-    });
+
+    })
 })
 
 

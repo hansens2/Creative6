@@ -10,10 +10,13 @@ function mainCtrl($scope, $http) {
     $scope.retrievedMessage = "Secret Message";
 
     $scope.postMessage = function () {
-        $http.post(api_root, { name: $scope.name, message: $scope.message })
+        console.log("In post message function");
+        
+        $http.post(api_root, { name: $scope.name, message: $scope.sendingMessage })
             .then(function (resp) {
                 if (resp) {
-                    $scope.pin = resp.data;
+                    $scope.pin = resp.data.data;
+                    
                 }
                 else {
                     console.log("Some error occured");
@@ -23,9 +26,18 @@ function mainCtrl($scope, $http) {
     }
 
     $scope.getMessage = function () {
-        $http.get(api_root + '/' + 31 * $scope.retrieveName * $scope.retrievePin)
+        console.log("In get message function");
+        $scope.retrievedMessage = "";
+        $http.get(api_root + '/' + $scope.retrieveName + '/' +  $scope.retrievePin)
             .then(function (resp) {
-                $scope.retrievedMessage = resp.data;
+                if (!resp) {
+                    $scope.retrievedMessage = "No Message Found"
+                }
+                else {
+                    $scope.retrievedMessage = resp.data;
+
+                }
+
             })
     }
 }
