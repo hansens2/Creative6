@@ -31,10 +31,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="public\javascripts\App.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
+    <Content Include="public\index.html" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="typings.json" />
@@ -58,6 +60,7 @@
     <Folder Include="typings\globals\express\" />
     <Folder Include="typings\globals\jade\" />
     <Folder Include="typings\globals\mime\" />
+    <Folder Include="typings\globals\mongoose\" />
     <Folder Include="typings\globals\morgan\" />
     <Folder Include="typings\globals\node\" />
     <Folder Include="typings\globals\serve-favicon\" />
@@ -73,6 +76,7 @@
     <TypeScriptCompile Include="typings\globals\express\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jade\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\mime\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\mongoose\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\morgan\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\serve-favicon\index.d.ts" />

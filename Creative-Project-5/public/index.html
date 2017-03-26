@@ -5,9 +5,10 @@
 
 <head>
     <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <title></title>
 </head>
-<body>
+<body ng-app="app" ng-controller="mainCtrl">
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -20,37 +21,39 @@
     <div class="col-sm-6">
       <h3>Leave A Secret Message</h3>
       <form>
-        <label for="name">Name:</label> <input class="form-control" type="text" id="name" placeholder="Name"><br>
+        <label for="name">Name:</label> <input ng-model="name" class="form-control" type="text" id="name" placeholder="Name"><br>
         <label for="sendMessage">Enter your Message:</label>
-        <textarea class="form-control" id="sendMessage" rows="3"></textarea>
+        <textarea ng-model="sendingMessage" class="form-control" id="sendMessage" rows="3"></textarea>
         <br>
       </form>
       <button class="btn btn-danger" id="leaveMessage">Encode</button>
+        <div>{{pin}}</div>
     </div>
     <div class="col-sm-6">
-
+        
       <h3>Receive A Message</h3>
       <div class="row">
         <div class="col-sm-6">
           <form>
-            <label for="senderName">Sender's Name:</label> <input class="form-control" type="text" id="senderName" placeholder="Name"><br>
-            <label for="pin">Message Pin:</label> <input class="form-control" type="text" id="pin" placeholder="Pin"><br>
+            <label for="senderName">Sender's Name:</label> <input ng-model="retrieveName" class="form-control" type="text" id="senderName" placeholder="Name"><br>
+            <label for="pin">Message Pin:</label> <input ng-model="retrievePin" class="form-control" type="text" id="pin" placeholder="Pin"><br>
           </form>
         </div>
         <div class="col-sm-6">
           <button class="btn btn-danger" id="recMessage">Decode</button>
         </div>
+          
       <br> <br>
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <div class="well" id="decMessage">Secret Message</div>
+          <div class="well" id="decMessage">{{retrievedMessage}}</div>
         </div>
       </div>
     </div>
 
   </div>
 
-
+    <script src="javascripts/App.js"></script>
 </body>
 </html>
