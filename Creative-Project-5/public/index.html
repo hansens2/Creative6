@@ -2,17 +2,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"  href="stylesheets/style.styl" />
 
 <head>
     <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <title></title>
+    <title>Cyber Secrets</title>
 </head>
 <body ng-app="app" ng-controller="mainCtrl">
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <h1>Secret Messages</h1>
+        <h1>Cyber Secrets</h1>
       </div>
     </div>
   </nav>
@@ -27,7 +28,8 @@
         <br>
       </form>
       <button ng-click="postMessage()" class="btn btn-danger" id="leaveMessage">Encode</button>
-        <div>{{pin}}</div>
+      <br> <br>
+        <div id="pinDiv" style="color: grey;">{{pin}}</div>
     </div>
     <div class="col-sm-6">
         
@@ -45,15 +47,14 @@
           
       <br> <br>
       </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="well" id="decMessage">{{retrievedMessage}}</div>
-        </div>
-      </div>
+
+      <div class="well" id="decMessage">{{retrievedMessage}}</div>
     </div>
 
   </div>
 
-    <script src="javascripts/App.js"></script>
+
+
+  <script src="javascripts/App.js"></script>
 </body>
 </html>
