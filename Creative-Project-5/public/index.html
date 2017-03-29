@@ -1,12 +1,15 @@
 ﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css"  href="stylesheets/style.styl" />
+
+
+<link rel="stylesheet" type="text/css"  href="stylesheets/app.css" />
 
 <head>
     <meta charset="utf-8" />
-    <link href="stylesheets/app.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <title>Cyber Secrets</title>
 </head>
@@ -21,41 +24,65 @@
 
   <div class="container-fluid">
     <div class="col-sm-6">
-      <h3>Leave A Secret Message</h3>
+      <h2>Leave A Secret Message</h2>
       <form>
         <label for="name">Name:</label> <input ng-model="name" class="form-control" type="text" id="name" placeholder="Name"><br>
         <label for="sendMessage">Enter your Message:</label>
         <textarea ng-model="sendingMessage" class="form-control" id="sendMessage" rows="3"></textarea>
         <br>
       </form>
-      <button ng-click="postMessage()" class="btn btn-danger" id="leaveMessage">Encode</button>
+      <button ng-click="postMessage()" class="btn btn-danger btn-lg" id="leaveMessage" data-toggle="modal" data-target="#myModal">Encode</button>
       <br> <br>
-        <div id="pinDiv" style="color: grey;">{{pin}}</div>
     </div>
     <div class="col-sm-6">
         
-      <h3>Receive A Message</h3>
-      <div class="row">
-        <div class="col-sm-6">
-          <form>
-            <label for="senderName">Sender's Name:</label> <input ng-model="retrieveName" class="form-control" type="text" id="senderName" placeholder="Name"><br>
-            <label for="pin">Message Pin:</label> <input ng-model="retrievePin" class="form-control" type="text" id="pin" placeholder="Pin"><br>
-          </form>
-        </div>
-        <div class="col-sm-6">
-          <button ng-click="getMessage()" class="btn btn-danger" id="recMessage">Decode</button>
-        </div>
-          
-      <br> <br>
-      </div>
+      <h2>Receive A Message</h2>
+      <form>
+        <label for="senderName">Sender's Name:</label> <input ng-model="retrieveName" class="form-control" type="text" id="senderName" placeholder="Name"><br>
+        <label for="pin">Message Pin:</label> <input ng-model="retrievePin" class="form-control" type="text" id="pin" placeholder="Pin"><br>
+      </form>
 
-      <div class="well" id="decMessage">{{retrievedMessage}}</div>
+      <button ng-click="getMessage()" class="btn btn-danger btn-lg" id="recMessage" data-toggle="modal" data-target="#myModal2">Decode</button>
+
     </div>
 
   </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Message Sent</h4>
+      </div>
+      <div class="modal-body">
+        Your message has been stored and can be retreived with the following pin. Remember this pin so you can share it with those you want - but don't worry! No one else will be able to get it.
+      </div>
+      <div class="modal-footer">
+        Your Pin: <h3> {{pin}} </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{name}}'s Message</h4>
+      </div>
+      <div class="modal-body">
+        {{retrievedMessage}}
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  <script src="javascripts/App.js"></script>
+<script src="javascripts/App.js"></script>
+
 </body>
 </html>

@@ -16,3 +16,7 @@ h1, #decMessage {
 #pinDiv {
   color: orange;
 }
+
+#myModal, #myModal2 {
+  color: rgb(0, 51, 128);
+}
