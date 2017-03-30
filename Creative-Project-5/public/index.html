@@ -16,36 +16,81 @@
 <body ng-app="app" ng-controller="mainCtrl">
   <nav class="navbar navbar-default">
     <div class="container">
-      <div class="navbar-header">
-        <h1>Cyber Secrets</h1>
+      <div class="navbar-header" style="color:black">
+        <h2>Cyber Secrets</h2>
       </div>
     </div>
   </nav>
 
   <div class="container-fluid">
-    <div class="col-sm-6">
-      <h2>Leave A Secret Message</h2>
-      <form>
-        <label for="name">Name:</label> <input ng-model="name" class="form-control" type="text" id="name" placeholder="Name"><br>
-        <label for="sendMessage">Enter your Message:</label>
-        <textarea ng-model="sendingMessage" class="form-control" id="sendMessage" rows="3"></textarea>
-        <br>
-      </form>
-      <button ng-click="postMessage()" class="btn btn-danger btn-lg" id="leaveMessage" data-toggle="modal" data-target="#myModal">Encode</button>
-      <br> <br>
-    </div>
-    <div class="col-sm-6">
-        
-      <h2>Receive A Message</h2>
-      <form>
-        <label for="senderName">Sender's Name:</label> <input ng-model="retrieveName" class="form-control" type="text" id="senderName" placeholder="Name"><br>
-        <label for="pin">Message Pin:</label> <input ng-model="retrievePin" class="form-control" type="text" id="pin" placeholder="Pin"><br>
-      </form>
+      <div class="row">
+          <div class="col-sm-6">
+              <h2>Leave A Secret Message</h2>
+              <form>
+                  <label for="name">Name:</label> <input ng-model="name" class="form-control" type="text" id="name" placeholder="Name"><br>
+                  <label for="sendMessage">Enter your Message:</label>
+                  <textarea ng-model="sendingMessage" class="form-control" id="sendMessage" rows="3"></textarea>
+                  <br>
+              </form>
+              <button ng-click="postMessage()" class="btn btn-danger btn-lg" id="leaveMessage" data-toggle="modal" data-target="#myModal">Encode</button>
+              <br> <br>
+          </div>
+          <div class="col-sm-6">
 
-      <button ng-click="getMessage()" class="btn btn-danger btn-lg" id="recMessage" data-toggle="modal" data-target="#myModal2">Decode</button>
+              <h2>Receive A Message</h2>
+              <form>
+                  <label for="senderName">Sender's Name:</label> <input ng-model="retrieveName" class="form-control" type="text" id="senderName" placeholder="Name"><br>
+                  <label for="pin">Message Pin:</label> <input ng-model="retrievePin" class="form-control" type="text" id="pin" placeholder="Pin"><br>
+              </form>
 
-    </div>
+              <button ng-click="getMessage()" class="btn btn-danger btn-lg" id="recMessage" data-toggle="modal" data-target="#myModal2">Decode</button>
 
+          </div>
+      </div>
+    
+    <br />
+      <div class="row">
+          <h2>Welcome to the Cyper Secret service.</h2>
+          <div class="col-sm-6">
+              <h3>To save a message:</h3>
+              <ol>
+                  <li>
+                      Type your name into the box given
+                  </li>
+                  <li>
+                      Type your message into the box below
+                  </li>
+                  <li>
+                      Honestly, not rocket science. Hit the button below the message box to submit the message.
+                  </li>
+                  <li>
+                      Then save the pin you are given!
+                  </li>
+              </ol>
+          </div>
+          <div class="col-sm-6">
+              <h3>
+                  To get a message:
+              </h3>
+              <ol>
+                  <li>
+                      Type the sender's name into the box given
+                  </li>
+                  <li>
+                      Type the pin given to the sender in the other box
+                  </li>
+                  <li>
+                      Press the button below the pin box.
+                  </li>
+                  <li>
+                      Messages can only be retrieved once! Then they are deleted. 
+                  </li>
+              </ol>
+          </div>
+          
+          
+
+      </div>
   </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -59,7 +104,11 @@
         Your message has been stored and can be retreived with the following pin. Remember this pin so you can share it with those you want - but don't worry! No one else will be able to get it.
       </div>
       <div class="modal-footer">
-        Your Pin: <h3> {{pin}} </h3>
+          <div class="row">
+              <h4> Your Pin: </h4>
+              <h3> {{pin}} </h3>
+          </div>
+       
       </div>
     </div>
   </div>
@@ -73,10 +122,17 @@
         <h4 class="modal-title" id="myModalLabel">{{name}}'s Message</h4>
       </div>
       <div class="modal-body">
-        {{retrievedMessage}}
+          <h4>Remember, this message will only be available once, and then will be deleted. Please save your message if you want to keep it!</h4>
+          <hr />
+          <textarea style="width:100%" rows="3" ng-model="retrievedMessage">
+
+          </textarea>
+          <!--<div> 
+            
+          </div>-->
+        <hr />
       </div>
-      <div class="modal-footer">
-      </div>
+      
     </div>
   </div>
 </div>
